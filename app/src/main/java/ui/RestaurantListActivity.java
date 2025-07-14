@@ -1,5 +1,6 @@
 package com.benja.restauranteapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,5 +27,11 @@ public class RestaurantListActivity extends AppCompatActivity {
         );
 
         listView.setAdapter(adapter);
+
+        // 👉 Aquí detectamos cuando el usuario toca un restaurante
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(RestaurantListActivity.this, RestaurantMenuActivity.class);
+            startActivity(intent);
+        });
     }
 }

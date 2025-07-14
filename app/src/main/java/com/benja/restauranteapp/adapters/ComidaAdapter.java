@@ -32,8 +32,8 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
     @Override
     public void onBindViewHolder(@NonNull ComidaViewHolder holder, int position) {
         Comida comida = listaComida.get(position);
-        holder.nombreText.setText(comida.getNombre());
-        holder.precioText.setText("$" + comida.getPrecio());
+        holder.txtNombreComida.setText(comida.getNombre());
+        holder.txtPrecioComida.setText("$" + comida.getPrecio());
     }
 
     @Override
@@ -42,12 +42,12 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
     }
 
     public static class ComidaViewHolder extends RecyclerView.ViewHolder {
-        TextView nombreText, precioText;
+        TextView txtNombreComida, txtPrecioComida;
 
         public ComidaViewHolder(@NonNull View itemView) {
             super(itemView);
-            nombreText = itemView.findViewById(R.id.nombreComida);
-            precioText = itemView.findViewById(R.id.precioComida);
+            txtNombreComida = itemView.findViewById(R.id.txtNombreComida);
+            txtPrecioComida = itemView.findViewById(R.id.txtPrecioComida);
         }
     }
 }

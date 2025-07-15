@@ -32,27 +32,55 @@ public class ComidaFragment extends Fragment {
         recyclerView = vista.findViewById(R.id.recyclerComida);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // ✅ Recuperamos el nombre del restaurante desde el Bundle
+        // 🔍 Obtenemos el nombre del restaurante y el tipo (comida, bebida, complemento)
         String nombreRestaurante = getArguments() != null ? getArguments().getString("nombreRestaurante") : "";
+        String tipo = getArguments() != null ? getArguments().getString("tipo") : "comida";
 
-        // ✅ Creamos una lista diferente para cada restaurante
         listaComida = new ArrayList<>();
 
-        if (nombreRestaurante.equals("Mexican Restaurant")) {
-            listaComida.add(new Comida("Tlacoyos", 35));
-            listaComida.add(new Comida("Panza", 200));
-        } else if (nombreRestaurante.equals("USA Restaurant")) {
-            listaComida.add(new Comida("Hamburguesa", 350));
-            listaComida.add(new Comida("Papas Fritas", 110));
-        } else if (nombreRestaurante.equals("Italian Restaurant")) {
-            listaComida.add(new Comida("Pasta Alfredo", 500));
-            listaComida.add(new Comida("Gelato", 200));
-        } else if (nombreRestaurante.equals("Japan Restaurant")) {
-            listaComida.add(new Comida("Sushi", 200));
-            listaComida.add(new Comida("Ramen", 470));
-        } else {
-            // Por si acaso
-            listaComida.add(new Comida("Comida genérica", 50.00));
+        // 💡 Cargamos según tipo y restaurante
+        if (tipo.equals("comida")) {
+            if (nombreRestaurante.equals("Mexican Restaurant")) {
+                listaComida.add(new Comida("Tlacoyos", 35));
+                listaComida.add(new Comida("Panza", 200));
+            } else if (nombreRestaurante.equals("USA Restaurant")) {
+                listaComida.add(new Comida("Hamburguesa", 350));
+                listaComida.add(new Comida("Papas Fritas", 110));
+            } else if (nombreRestaurante.equals("Italian Restaurant")) {
+                listaComida.add(new Comida("Pasta Alfredo", 500));
+                listaComida.add(new Comida("Gelato", 200));
+            } else if (nombreRestaurante.equals("Japan Restaurant")) {
+                listaComida.add(new Comida("Sushi", 200));
+                listaComida.add(new Comida("Ramen", 470));
+            }
+        } else if (tipo.equals("bebida")) {
+            if (nombreRestaurante.equals("Mexican Restaurant")) {
+                listaComida.add(new Comida("Coca-Cola", 45));
+                listaComida.add(new Comida("Cerveza", 80));
+            } else if (nombreRestaurante.equals("USA Restaurant")) {
+                listaComida.add(new Comida("Diet-Coke", 50));
+                listaComida.add(new Comida("Malteada", 90));
+            } else if (nombreRestaurante.equals("Italian Restaurant")) {
+                listaComida.add(new Comida("Vino Tinto", 100));
+                listaComida.add(new Comida("Vino blanco", 90));
+            } else if (nombreRestaurante.equals("Japan Restaurant")) {
+                listaComida.add(new Comida("Te Matcha", 44));
+                listaComida.add(new Comida("Coca-Cola", 40));
+            }
+        } else if (tipo.equals("complemento")) {
+            if (nombreRestaurante.equals("Mexican Restaurant")) {
+                listaComida.add(new Comida("Guacamole", 30));
+                listaComida.add(new Comida("Totopos", 40));
+            } else if (nombreRestaurante.equals("USA Restaurant")) {
+                listaComida.add(new Comida("Papas Extra", 80));
+                listaComida.add(new Comida("Queso", 20));
+            } else if (nombreRestaurante.equals("Italian Restaurant")) {
+                listaComida.add(new Comida("Pasta", 60));
+                listaComida.add(new Comida("Queso parmesano", 40));
+            } else if (nombreRestaurante.equals("Japan Restaurant")) {
+                listaComida.add(new Comida("Wasabi", 40));
+                listaComida.add(new Comida("Jengibre", 30));
+            }
         }
 
         adapter = new ComidaAdapter(listaComida);

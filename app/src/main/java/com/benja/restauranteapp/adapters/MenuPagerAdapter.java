@@ -1,6 +1,6 @@
 package com.benja.restauranteapp.adapters;
 
-import android.os.Bundle;
+import android.os.Bundle; // ✅ FALTABA ESTE IMPORT
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,7 +13,6 @@ public class MenuPagerAdapter extends FragmentStateAdapter {
 
     private final String nombreRestaurante;
 
-    // ✅ Ahora recibimos el nombre del restaurante en el constructor
     public MenuPagerAdapter(@NonNull FragmentActivity fragmentActivity, String nombreRestaurante) {
         super(fragmentActivity);
         this.nombreRestaurante = nombreRestaurante;
@@ -22,22 +21,29 @@ public class MenuPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        // ✅ Creamos el fragmento y le pasamos el nombre del restaurante
-        if (position == 0) {
-            ComidaFragment fragment = new ComidaFragment();
+        ComidaFragment fragment = new ComidaFragment();
 
-            Bundle args = new Bundle();
-            args.putString("nombreRestaurante", nombreRestaurante);
-            fragment.setArguments(args);
+        Bundle args = new Bundle(); // ✅ Ya no marcará error
+        args.putString("nombreRestaurante", nombreRestaurante);
 
-            return fragment;
+        switch (position) {
+            case 0:
+                args.putString("tipo", "comida");
+                break;
+            case 1:
+                args.putString("tipo", "bebida");
+                break;
+            case 2:
+                args.putString("tipo", "complemento");
+                break;
         }
 
-        return new ComidaFragment(); // fallback
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 3; // comida, bebida, complemento
     }
 }

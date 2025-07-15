@@ -3,7 +3,6 @@ package com.benja.restauranteapp.ui;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -16,38 +15,42 @@ public class RestaurantMenuActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
-    private MenuPagerAdapter pagerAdapter;
     private TextView restaurantTitle;
+    private MenuPagerAdapter pagerAdapter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_menu);
 
-        // ✅ Recuperamos el nombre del restaurante que se pasó desde RestaurantListActivity
+        // ✅ Obtenemos el nombre del restaurante
         String nombreRestaurante = getIntent().getStringExtra("nombreRestaurante");
 
-        // Enlazamos vistas
+        // ✅ Conectamos vistas
         restaurantTitle = findViewById(R.id.restaurantTitle);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 
-        // ✅ Mostramos el nombre del restaurante en pantalla
+        // ✅ Mostramos el nombre del restaurante
         restaurantTitle.setText(nombreRestaurante);
 
-        // ✅ Pasamos el nombre del restaurante al adaptador de tabs
+        // ✅ Creamos el adaptador y se lo pasamos al ViewPager
         pagerAdapter = new MenuPagerAdapter(this, nombreRestaurante);
         viewPager.setAdapter(pagerAdapter);
 
-        // Conectamos los tabs con el ViewPager
-        new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> {
-                    switch (position) {
-                        case 0:
-                            tab.setText("Comida");
-                            break;
-                        // Puedes agregar más tabs después si quieres
-                    }
-                }).attach();
+        // ✅ Conectamos las pestañas al ViewPager
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setText("Comida");
+                    break;
+                case 1:
+                    tab.setText("Bebidas");
+                    break;
+                case 2:
+                    tab.setText("Complementos");
+                    break;
+            }
+        }).attach();
     }
 }

@@ -8,10 +8,11 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.benja.restauranteapp.R;
+import com.benja.restauranteapp.ui.RestaurantMenuActivity;
 
 public class RestaurantListActivity extends AppCompatActivity {
 
-    String[] restaurantes = {"Restaurante A", "Restaurante B", "Restaurante C", "Restaurante D"};
+    String[] restaurantes = {"Mexican Restaurant", "USA Restaurant", "Italian Restaurant", "Japan Restaurant"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,6 @@ public class RestaurantListActivity extends AppCompatActivity {
         );
 
         listView.setAdapter(adapter);
-
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(RestaurantListActivity.this, RestaurantMenuActivity.class);

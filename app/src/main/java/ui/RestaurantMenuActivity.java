@@ -1,6 +1,7 @@
 package com.benja.restauranteapp.ui;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,18 +17,26 @@ public class RestaurantMenuActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private MenuPagerAdapter pagerAdapter;
+    private TextView restaurantTitle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_menu);
 
-        // Enlazamos las vistas
+        // ✅ Recuperamos el nombre del restaurante que se pasó desde RestaurantListActivity
+        String nombreRestaurante = getIntent().getStringExtra("nombreRestaurante");
+
+        // Enlazamos vistas
+        restaurantTitle = findViewById(R.id.restaurantTitle);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 
-        // Creamos y asignamos el adaptador
-        pagerAdapter = new MenuPagerAdapter(this);
+        // ✅ Mostramos el nombre del restaurante en pantalla
+        restaurantTitle.setText(nombreRestaurante);
+
+        // ✅ Pasamos el nombre del restaurante al adaptador de tabs
+        pagerAdapter = new MenuPagerAdapter(this, nombreRestaurante);
         viewPager.setAdapter(pagerAdapter);
 
         // Conectamos los tabs con el ViewPager
@@ -37,7 +46,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
                         case 0:
                             tab.setText("Comida");
                             break;
-                        // Puedes agregar más tabs aquí
+                        // Puedes agregar más tabs después si quieres
                     }
                 }).attach();
     }

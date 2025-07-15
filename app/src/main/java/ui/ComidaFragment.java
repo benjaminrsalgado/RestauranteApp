@@ -27,21 +27,34 @@ public class ComidaFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflamos el layout del fragmento
         View vista = inflater.inflate(R.layout.fragment_comida, container, false);
 
-        // Referencia al RecyclerView
         recyclerView = vista.findViewById(R.id.recyclerComida);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Datos de prueba
-        listaComida = new ArrayList<>();
-        listaComida.add(new Comida("Tacos al Pastor", 35.00));
-        listaComida.add(new Comida("Enchiladas Verdes", 45.00));
-        listaComida.add(new Comida("Pozole", 60.00));
-        listaComida.add(new Comida("Quesadillas", 25.00));
+        // ✅ Recuperamos el nombre del restaurante desde el Bundle
+        String nombreRestaurante = getArguments() != null ? getArguments().getString("nombreRestaurante") : "";
 
-        // Adapter
+        // ✅ Creamos una lista diferente para cada restaurante
+        listaComida = new ArrayList<>();
+
+        if (nombreRestaurante.equals("Mexican Restaurant")) {
+            listaComida.add(new Comida("Tlacoyos", 35));
+            listaComida.add(new Comida("Panza", 200));
+        } else if (nombreRestaurante.equals("USA Restaurant")) {
+            listaComida.add(new Comida("Hamburguesa", 350));
+            listaComida.add(new Comida("Papas Fritas", 110));
+        } else if (nombreRestaurante.equals("Italian Restaurant")) {
+            listaComida.add(new Comida("Pasta Alfredo", 500));
+            listaComida.add(new Comida("Gelato", 200));
+        } else if (nombreRestaurante.equals("Japan Restaurant")) {
+            listaComida.add(new Comida("Sushi", 200));
+            listaComida.add(new Comida("Ramen", 470));
+        } else {
+            // Por si acaso
+            listaComida.add(new Comida("Comida genérica", 50.00));
+        }
+
         adapter = new ComidaAdapter(listaComida);
         recyclerView.setAdapter(adapter);
 

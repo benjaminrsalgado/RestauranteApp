@@ -13,12 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestauranteApp">
 
-        <!-- Actividad que muestra el menú de comida -->
+
         <activity
             android:name=".ui.RestaurantMenuActivity"
             android:exported="true" />
 
-        <!-- Actividad principal que lista los restaurantes -->
+
         <activity
             android:name=".ui.RestaurantListActivity"
             android:exported="true">

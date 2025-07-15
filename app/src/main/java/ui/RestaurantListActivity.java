@@ -28,9 +28,10 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        // 👉 Aquí detectamos cuando el usuario toca un restaurante
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(RestaurantListActivity.this, RestaurantMenuActivity.class);
+            intent.putExtra("nombreRestaurante", restaurantes[position]); // 🎯 PASAMOS el nombre seleccionado
             startActivity(intent);
         });
     }

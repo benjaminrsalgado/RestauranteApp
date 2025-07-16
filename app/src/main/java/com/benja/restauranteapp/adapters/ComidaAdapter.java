@@ -1,5 +1,7 @@
 package com.benja.restauranteapp.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.benja.restauranteapp.R;
 import com.benja.restauranteapp.models.Comida;
+import com.benja.restauranteapp.ui.ItemDetailActivity; // 👈 Asegúrate de importar esto
 
 import java.util.List;
 
@@ -34,6 +37,19 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
         Comida comida = listaComida.get(position);
         holder.txtNombreComida.setText(comida.getNombre());
         holder.txtPrecioComida.setText("$" + comida.getPrecio());
+
+        // 🎯 Abrir detalle al tocar el platillo
+        holder.itemView.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, ItemDetailActivity.class);
+
+            intent.putExtra("nombre", comida.getNombre());
+            intent.putExtra("precio", comida.getPrecio());
+            intent.putExtra("descripcion", comida.getDescripcion());
+            intent.putExtra("imagenResId", comida.getImagenResId());
+
+            context.startActivity(intent);
+        });
     }
 
     @Override

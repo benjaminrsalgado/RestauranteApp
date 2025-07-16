@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.benja.restauranteapp.R;
 import com.benja.restauranteapp.models.Comida;
-import com.benja.restauranteapp.ui.ItemDetailActivity; // 👈 Asegúrate de importar esto
+import com.benja.restauranteapp.ui.ItemDetailActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaViewHolder> {
 
     private List<Comida> listaComida;
+    private List<Comida> listaCompleta; // ✅ respaldo para búsqueda
 
     public ComidaAdapter(List<Comida> listaComida) {
         this.listaComida = listaComida;
+        this.listaCompleta = new ArrayList<>(listaComida); // copiar original
     }
 
     @NonNull
@@ -38,16 +41,13 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
         holder.txtNombreComida.setText(comida.getNombre());
         holder.txtPrecioComida.setText("$" + comida.getPrecio());
 
-        // 🎯 Abrir detalle al tocar el platillo
         holder.itemView.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent intent = new Intent(context, ItemDetailActivity.class);
-
             intent.putExtra("nombre", comida.getNombre());
             intent.putExtra("precio", comida.getPrecio());
             intent.putExtra("descripcion", comida.getDescripcion());
             intent.putExtra("imagenResId", comida.getImagenResId());
-
             context.startActivity(intent);
         });
     }
@@ -65,5 +65,23 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
             txtNombreComida = itemView.findViewById(R.id.txtNombreComida);
             txtPrecioComida = itemView.findViewById(R.id.txtPrecioComida);
         }
+    }
+
+    // ✅ Método para filtrar la lista según el texto
+    public void filtrar(String texto) {
+        texto = texto.toLowerCase();
+        listaComida.clear();
+
+        if (texto.isEmpty()) {
+            listaComida.addAll(listaCompleta); // volver a mostrar todo
+        } else {
+            for (Comida comida : listaCompleta) {
+                if (comida.getNombre().toLowerCase().contains(texto)) {
+                    listaComida.add(comida);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
     }
 }

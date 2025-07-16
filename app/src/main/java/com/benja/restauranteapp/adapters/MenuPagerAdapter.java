@@ -1,6 +1,6 @@
 package com.benja.restauranteapp.adapters;
 
-import android.os.Bundle; // ✅ FALTABA ESTE IMPORT
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,6 +12,7 @@ import com.benja.restauranteapp.ui.ComidaFragment;
 public class MenuPagerAdapter extends FragmentStateAdapter {
 
     private final String nombreRestaurante;
+    private final Fragment[] fragments = new Fragment[3];
 
     public MenuPagerAdapter(@NonNull FragmentActivity fragmentActivity, String nombreRestaurante) {
         super(fragmentActivity);
@@ -23,7 +24,7 @@ public class MenuPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         ComidaFragment fragment = new ComidaFragment();
 
-        Bundle args = new Bundle(); // ✅ Ya no marcará error
+        Bundle args = new Bundle();
         args.putString("nombreRestaurante", nombreRestaurante);
 
         switch (position) {
@@ -39,11 +40,20 @@ public class MenuPagerAdapter extends FragmentStateAdapter {
         }
 
         fragment.setArguments(args);
+        fragments[position] = fragment;
         return fragment;
     }
 
     @Override
     public int getItemCount() {
-        return 3; // comida, bebida, complemento
+        return 3;
     }
-}
+
+
+    public void filtrarEnFragment(int position, String texto) {
+        Fragment fragment = fragments[position];
+        if (fragment instanceof ComidaFragment) {
+            ((ComidaFragment) fragment).filtrarPorTexto(texto);
+        }
+    }
+    }

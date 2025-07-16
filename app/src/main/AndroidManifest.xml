@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestauranteApp">
 
-        <!-- Pantalla principal al inicio -->
+
         <activity
             android:name=".ui.RestaurantListActivity"
             android:exported="true">
@@ -23,12 +23,12 @@
             </intent-filter>
         </activity>
 
-        <!-- Pantalla con tabs -->
+
         <activity
             android:name=".ui.RestaurantMenuActivity"
             android:exported="true" />
 
-        <!-- Pantalla de detalle al tocar un platillo -->
+
         <activity
             android:name=".ui.ItemDetailActivity"
             android:exported="false" />

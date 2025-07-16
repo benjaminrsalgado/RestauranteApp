@@ -43,7 +43,7 @@ public class ComidaFragment extends Fragment {
             nombreRestaurante = getArguments().getString("nombreRestaurante", "");
         }
 
-        // ✅ Cargar datos según restaurante y tipo
+
         if (tipo.equals("comida")) {
             if (nombreRestaurante.equals("Mexican Restaurant")) {
                 listaComida.add(new Comida("Tlacoyos", 35, "Platillo mexicano", R.drawable.placeholder));

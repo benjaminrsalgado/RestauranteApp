@@ -1,5 +1,6 @@
 package com.benja.restauranteapp.adapters;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -20,11 +21,11 @@ import java.util.List;
 public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaViewHolder> {
 
     private List<Comida> listaComida;
-    private List<Comida> listaCompleta; // ✅ respaldo para búsqueda
+    private List<Comida> listaCompleta;
 
     public ComidaAdapter(List<Comida> listaComida) {
         this.listaComida = listaComida;
-        this.listaCompleta = new ArrayList<>(listaComida); // copiar original
+        this.listaCompleta = new ArrayList<>(listaComida);
     }
 
     @NonNull
@@ -67,13 +68,13 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
         }
     }
 
-    // ✅ Método para filtrar la lista según el texto
+
     public void filtrar(String texto) {
         texto = texto.toLowerCase();
         listaComida.clear();
 
         if (texto.isEmpty()) {
-            listaComida.addAll(listaCompleta); // volver a mostrar todo
+            listaComida.addAll(listaCompleta);
         } else {
             for (Comida comida : listaCompleta) {
                 if (comida.getNombre().toLowerCase().contains(texto)) {

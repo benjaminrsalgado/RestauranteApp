@@ -1,5 +1,6 @@
 package com.benja.restauranteapp.models;
 
+
 public class Comida {
     private String nombre;
     private double precio;

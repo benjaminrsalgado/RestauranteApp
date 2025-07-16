@@ -1,11 +1,12 @@
-package com.benja.restauranteapp.ui;
+package com.benja.restauranteapp;
+
 
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar; // 👈 NUEVO
+import androidx.appcompat.widget.Toolbar;
 
 import com.benja.restauranteapp.R;
 

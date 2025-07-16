@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Toolbar con flecha de regreso y buscador -->
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarRestaurante"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <!-- TabLayout para las pestañas -->
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
         app:tabSelectedTextColor="@android:color/holo_blue_dark"
         app:tabTextColor="@android:color/darker_gray" />
 
-    <!-- ViewPager2 para mostrar los fragments de comida, bebida, complemento -->
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"

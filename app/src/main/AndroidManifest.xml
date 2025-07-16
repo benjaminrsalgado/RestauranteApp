@@ -5,15 +5,12 @@
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="RestauranteApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestauranteApp">
 
-        <!-- Pantalla principal al inicio -->
         <activity
             android:name=".ui.RestaurantListActivity"
             android:exported="true">
@@ -23,12 +20,10 @@
             </intent-filter>
         </activity>
 
-        <!-- Pantalla con tabs -->
         <activity
             android:name=".ui.RestaurantMenuActivity"
             android:exported="true" />
 
-        <!-- Pantalla de detalle al tocar un platillo -->
         <activity
             android:name=".ui.ItemDetailActivity"
             android:exported="false" />

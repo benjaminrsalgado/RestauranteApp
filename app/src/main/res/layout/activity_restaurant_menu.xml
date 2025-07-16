@@ -3,33 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <!-- Título del restaurante con ícono de búsqueda -->
-    <LinearLayout
+    <!-- Toolbar con flecha de regreso y buscador -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarRestaurante"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingBottom="8dp">
-
-        <TextView
-            android:id="@+id/restaurantTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nombre del Restaurante"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/searchIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_search"
-            android:contentDescription="Buscar" />
-    </LinearLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:titleTextColor="@android:color/white"
+        app:title="Nombre del Restaurante"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <!-- TabLayout para las pestañas -->
     <com.google.android.material.tabs.TabLayout
@@ -40,11 +25,10 @@
         app:tabSelectedTextColor="@android:color/holo_blue_dark"
         app:tabTextColor="@android:color/darker_gray" />
 
-    <!-- ViewPager2 para los fragmentos -->
+    <!-- ViewPager2 para mostrar los fragments de comida, bebida, complemento -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
 </LinearLayout>

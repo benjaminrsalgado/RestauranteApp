@@ -1,9 +1,11 @@
 package com.benja.restauranteapp.ui;
 
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.benja.restauranteapp.R;
@@ -15,8 +17,8 @@ public class RestaurantMenuActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
-    private TextView restaurantTitle;
     private MenuPagerAdapter pagerAdapter;
+    private String nombreRestaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,21 +26,25 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_menu);
 
         // ✅ Obtenemos el nombre del restaurante
-        String nombreRestaurante = getIntent().getStringExtra("nombreRestaurante");
+        nombreRestaurante = getIntent().getStringExtra("nombreRestaurante");
+
+        // ✅ Configuramos Toolbar como ActionBar
+        Toolbar toolbar = findViewById(R.id.toolbarRestaurante);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(nombreRestaurante);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // ← muestra la flecha
+        }
 
         // ✅ Conectamos vistas
-        restaurantTitle = findViewById(R.id.restaurantTitle);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 
-        // ✅ Mostramos el nombre del restaurante
-        restaurantTitle.setText(nombreRestaurante);
-
-        // ✅ Creamos el adaptador y se lo pasamos al ViewPager
+        // ✅ Creamos adaptador con nombre del restaurante
         pagerAdapter = new MenuPagerAdapter(this, nombreRestaurante);
         viewPager.setAdapter(pagerAdapter);
 
-        // ✅ Conectamos las pestañas al ViewPager
+        // ✅ Configuramos pestañas
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
                 case 0:
@@ -52,5 +58,32 @@ public class RestaurantMenuActivity extends AppCompatActivity {
                     break;
             }
         }).attach();
+    }
+
+    // ✅ Inflamos menú (donde estará el ícono de búsqueda)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_busqueda, menu);
+        return true;
+    }
+
+    // ✅ Acciones al hacer clic en ítems del menú (ej: la lupa)
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // ← cerrar esta pantalla (regresar)
+            return true;
+        } else if (item.getItemId() == R.id.action_search) {
+            // Aquí luego puedes abrir un cuadro de búsqueda o un nuevo fragment
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    // ✅ Asegura que la flecha de regreso funcione siempre
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed(); // ← equivalente a presionar el botón de regresar
+        return true;
     }
 }

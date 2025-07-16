@@ -24,8 +24,8 @@ public class ComidaFragment extends Fragment {
     private ComidaAdapter adapter;
     private List<Comida> listaComida;
 
-    private String tipo = "comida"; // lo puedes actualizar según pestaña
-    private String nombreRestaurante = "Mexican Restaurant"; // actualiza desde argumentos
+    private String tipo = "comida";
+    private String nombreRestaurante = "Mexican Restaurant";
 
     @Nullable
     @Override
@@ -38,13 +38,13 @@ public class ComidaFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listaComida = new ArrayList<>();
 
-        // 📌 Carga el nombre del restaurante y el tipo desde los argumentos
+
         if (getArguments() != null) {
             tipo = getArguments().getString("tipo", "comida");
             nombreRestaurante = getArguments().getString("nombreRestaurante", "");
         }
 
-        // 🍽️ Cargar datos según restaurante y tipo
+
         if (tipo.equals("comida")) {
             if (nombreRestaurante.equals("Mexican Restaurant")) {
                 listaComida.add(new Comida("Tlacoyos", 35, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.", R.drawable.placeholder));

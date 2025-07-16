@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar; // 👈 NUEVO
 
 import com.benja.restauranteapp.R;
 
@@ -16,21 +17,31 @@ public class ItemDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_detail); // Este layout lo vamos a crear en el paso 2
+        setContentView(R.layout.activity_item_detail);
 
-        // Conectamos las vistas
+
+        Toolbar toolbar = findViewById(R.id.toolbarDetalle);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+
+        toolbar.setNavigationOnClickListener(v -> finish());
+
+
         nombreTextView = findViewById(R.id.nombreComida);
         precioTextView = findViewById(R.id.precioComida);
         descripcionTextView = findViewById(R.id.descripcionComida);
         imagenView = findViewById(R.id.imagenComida);
 
-        // Recibimos los datos del Intent
+
         String nombre = getIntent().getStringExtra("nombre");
         double precio = getIntent().getDoubleExtra("precio", 0);
         String descripcion = getIntent().getStringExtra("descripcion");
-        int imagenResId = getIntent().getIntExtra("imagenResId", R.drawable.placeholder); // imagen por defecto
+        int imagenResId = getIntent().getIntExtra("imagenResId", R.drawable.placeholder);
 
-        // Mostramos los datos
+
         nombreTextView.setText(nombre);
         precioTextView.setText("$" + precio);
         descripcionTextView.setText(descripcion);

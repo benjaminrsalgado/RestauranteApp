@@ -1,41 +1,34 @@
 package com.benja.restauranteapp.db;
 
-
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import static androidx.room.ForeignKey.CASCADE;
-
-/**
- * Entidad que representa una comida, bebida o complemento.
- */
-@Entity(
-        tableName = "food",
-        foreignKeys = @ForeignKey(
-                entity = Restaurant.class,
-                parentColumns = "id",
-                childColumns = "restaurant_id",
-                onDelete = CASCADE
-        )
-)
+@Entity(tableName = "food")
 public class Food {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    @ColumnInfo(name = "restaurant_id", index = true)
-    public int restaurantId;
-
-    @NonNull
     public String name;
-
     public double price;
-
     public String description;
+    public String type;
+    public String restaurantName; // puedes mantenerlo si lo usas para mostrar
+    public int restaurant_id;     // 👈 ESTE es el que faltaba
 
-    @NonNull
-    public FoodType type;  // Esto usa un enum que crearemos enseguida
+    public Food(String name, double price, String description, String type, String restaurantName, int restaurant_id) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.type = type;
+        this.restaurantName = restaurantName;
+        this.restaurant_id = restaurant_id;
+    }
+
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+    public String getDescription() { return description; }
+    public String getType() { return type; }
+    public String getRestaurantName() { return restaurantName; }
+    public int getRestaurant_id() { return restaurant_id; }
 }

@@ -1,6 +1,5 @@
 package com.benja.restauranteapp.adapters;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,18 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.benja.restauranteapp.R;
-import com.benja.restauranteapp.models.Comida;
-import com.benja.restauranteapp.ui.ItemDetailActivity;
+import com.benja.restauranteapp.db.Food;
+import com.benja.restauranteapp.ItemDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaViewHolder> {
 
-    private List<Comida> listaComida;
-    private List<Comida> listaCompleta;
+    private List<Food> listaComida;
+    private List<Food> listaCompleta;
 
-    public ComidaAdapter(List<Comida> listaComida) {
+    public ComidaAdapter(List<Food> listaComida) {
         this.listaComida = listaComida;
         this.listaCompleta = new ArrayList<>(listaComida);
     }
@@ -38,17 +37,17 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
 
     @Override
     public void onBindViewHolder(@NonNull ComidaViewHolder holder, int position) {
-        Comida comida = listaComida.get(position);
-        holder.txtNombreComida.setText(comida.getNombre());
-        holder.txtPrecioComida.setText("$" + comida.getPrecio());
+        Food comida = listaComida.get(position);
+        holder.txtNombreComida.setText(comida.getName());
+        holder.txtPrecioComida.setText("$" + comida.getPrice());
 
         holder.itemView.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent intent = new Intent(context, ItemDetailActivity.class);
-            intent.putExtra("nombre", comida.getNombre());
-            intent.putExtra("precio", comida.getPrecio());
-            intent.putExtra("descripcion", comida.getDescripcion());
-            intent.putExtra("imagenResId", comida.getImagenResId());
+            intent.putExtra("nombre", comida.getName());
+            intent.putExtra("precio", comida.getPrice());
+            intent.putExtra("descripcion", comida.getDescription());
+            intent.putExtra("imagenResId", R.drawable.placeholder); // usa imagen por defecto
             context.startActivity(intent);
         });
     }
@@ -68,7 +67,6 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
         }
     }
 
-
     public void filtrar(String texto) {
         texto = texto.toLowerCase();
         listaComida.clear();
@@ -76,8 +74,8 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
         if (texto.isEmpty()) {
             listaComida.addAll(listaCompleta);
         } else {
-            for (Comida comida : listaCompleta) {
-                if (comida.getNombre().toLowerCase().contains(texto)) {
+            for (Food comida : listaCompleta) {
+                if (comida.getName().toLowerCase().contains(texto)) {
                     listaComida.add(comida);
                 }
             }

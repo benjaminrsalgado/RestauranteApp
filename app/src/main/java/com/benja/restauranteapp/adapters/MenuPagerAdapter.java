@@ -1,6 +1,5 @@
 package com.benja.restauranteapp.adapters;
 
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +12,7 @@ import com.benja.restauranteapp.ui.ComidaFragment;
 public class MenuPagerAdapter extends FragmentStateAdapter {
 
     private final String nombreRestaurante;
-    private final Fragment[] fragments = new Fragment[3];
+    private final ComidaFragment[] fragments = new ComidaFragment[3];
 
     public MenuPagerAdapter(@NonNull FragmentActivity fragmentActivity, String nombreRestaurante) {
         super(fragmentActivity);
@@ -23,25 +22,28 @@ public class MenuPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        ComidaFragment fragment = new ComidaFragment();
-
-        Bundle args = new Bundle();
-        args.putString("nombreRestaurante", nombreRestaurante);
-
+        String tipo;
         switch (position) {
             case 0:
-                args.putString("tipo", "comida");
+                tipo = "comida";
                 break;
             case 1:
-                args.putString("tipo", "bebida");
+                tipo = "bebida";
                 break;
             case 2:
-                args.putString("tipo", "complemento");
+                tipo = "complemento";
                 break;
+            default:
+                tipo = "comida";
         }
 
+        ComidaFragment fragment = new ComidaFragment();
+        Bundle args = new Bundle();
+        args.putString("nombreRestaurante", nombreRestaurante);
+        args.putString("tipo", tipo);
         fragment.setArguments(args);
-        fragments[position] = fragment;
+
+        fragments[position] = fragment; // ✅ Guardamos la instancia para luego filtrar
         return fragment;
     }
 
@@ -50,11 +52,10 @@ public class MenuPagerAdapter extends FragmentStateAdapter {
         return 3;
     }
 
-
+    // ✅ Método seguro para filtrar en el fragmento correcto
     public void filtrarEnFragment(int position, String texto) {
-        Fragment fragment = fragments[position];
-        if (fragment instanceof ComidaFragment) {
-            ((ComidaFragment) fragment).filtrarPorTexto(texto);
+        if (position >= 0 && position < fragments.length && fragments[position] != null) {
+            fragments[position].filtrarPorTexto(texto);
         }
     }
-    }
+}

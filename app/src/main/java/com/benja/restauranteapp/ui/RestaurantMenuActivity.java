@@ -1,14 +1,12 @@
 package com.benja.restauranteapp.ui;
 
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.benja.restauranteapp.R;
@@ -28,10 +26,10 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_menu);
 
-
+        // Obtener el nombre del restaurante desde el intent
         nombreRestaurante = getIntent().getStringExtra("nombreRestaurante");
 
-
+        // Configurar la Toolbar con flecha de regreso
         Toolbar toolbar = findViewById(R.id.toolbarRestaurante);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -39,15 +37,13 @@ public class RestaurantMenuActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-
+        // Configurar tabs y ViewPager2
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
-
-
         pagerAdapter = new MenuPagerAdapter(this, nombreRestaurante);
         viewPager.setAdapter(pagerAdapter);
 
-
+        // Asignar títulos a las pestañas
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
                 case 0:
@@ -62,7 +58,6 @@ public class RestaurantMenuActivity extends AppCompatActivity {
             }
         }).attach();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,9 +85,9 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Maneja la flecha de regreso en la Toolbar
         if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
@@ -100,15 +95,11 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    // Aplica filtro al fragmento actual
     private void filtrarTexto(String texto) {
         int posicion = viewPager.getCurrentItem();
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag("f" + posicion);
-        if (fragment instanceof ComidaFragment) {
-            ((ComidaFragment) fragment).filtrarPorTexto(texto);
-        }
+        pagerAdapter.filtrarEnFragment(posicion, texto);
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {

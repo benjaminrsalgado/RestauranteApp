@@ -1,6 +1,5 @@
 package com.benja.restauranteapp.ui;
 
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,7 @@ import com.benja.restauranteapp.R;
 import com.benja.restauranteapp.adapters.ComidaAdapter;
 import com.benja.restauranteapp.db.AppDatabase;
 import com.benja.restauranteapp.db.Food;
+import com.benja.restauranteapp.db.Restaurant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +25,14 @@ public class ComidaFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ComidaAdapter adapter;
-    private List<Food> listaComida = new ArrayList<>();
+    private final List<Food> listaComida = new ArrayList<>();
 
     private String tipo = "comida";
     private String nombreRestaurante = "";
+
+    public ComidaFragment() {
+        // Constructor vacío requerido por FragmentManager
+    }
 
     @Nullable
     @Override
@@ -42,6 +46,7 @@ public class ComidaFragment extends Fragment {
         adapter = new ComidaAdapter(listaComida);
         recyclerView.setAdapter(adapter);
 
+        // Recuperar argumentos pasados desde MenuPagerAdapter
         if (getArguments() != null) {
             tipo = getArguments().getString("tipo", "comida");
             nombreRestaurante = getArguments().getString("nombreRestaurante", "");
@@ -55,8 +60,15 @@ public class ComidaFragment extends Fragment {
     private void cargarComidaDesdeDB() {
         Executors.newSingleThreadExecutor().execute(() -> {
             AppDatabase db = AppDatabase.getInstance(requireContext());
-            List<Food> resultado = db.foodDao().getByType(tipo);  // ← usamos tu FoodDao
 
+            // Buscar el restaurante por nombre
+            Restaurant restaurante = db.restaurantDao().getByName(nombreRestaurante);
+            if (restaurante == null) return;
+
+            // Obtener la lista de alimentos filtrados por tipo y restaurante
+            List<Food> resultado = db.foodDao().getByTypeAndRestaurant(tipo, restaurante.id);
+
+            // Actualizar la interfaz en el hilo principal
             requireActivity().runOnUiThread(() -> {
                 listaComida.clear();
                 listaComida.addAll(resultado);
@@ -65,6 +77,7 @@ public class ComidaFragment extends Fragment {
         });
     }
 
+    // Método público que llama al filtro del adapter
     public void filtrarPorTexto(String texto) {
         if (adapter != null) {
             adapter.filtrar(texto);

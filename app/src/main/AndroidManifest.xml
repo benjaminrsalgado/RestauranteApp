@@ -5,29 +5,32 @@
 
     <application
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="RestauranteApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestauranteApp">
-
+        <activity
+            android:name=".ui.RegistrarRestauranteActivity"
+            android:exported="false" />
+        <!-- Pantalla principal al inicio -->
         <activity
             android:name=".ui.RestaurantListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
+        </activity> <!-- Pantalla con tabs -->
         <activity
             android:name=".ui.RestaurantMenuActivity"
-            android:exported="true" />
-
+            android:exported="true" /> <!-- Pantalla de detalle al tocar un platillo -->
         <activity
             android:name=".ui.ItemDetailActivity"
             android:exported="false" />
-
     </application>
 
 </manifest>

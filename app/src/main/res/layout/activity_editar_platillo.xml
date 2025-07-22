@@ -2,93 +2,99 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Toolbar -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarRegistrar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:title="Nuevo platillo"
-            android:titleTextColor="@android:color/white"
-            android:navigationIcon="@drawable/ic_arrow_back" />
 
-        <!-- Campo: Nombre -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editar platillo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/purple_500"
+            android:layout_marginBottom="16dp" />
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nombre:"
-            android:layout_marginTop="16dp"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etNombrePlatillo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ej. Tacos al pastor" />
+            android:hint="Ej. Enchiladas" />
 
-        <!-- Campo: Precio -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Precio:"
-            android:layout_marginTop="16dp"
             android:textStyle="bold"
-            android:textSize="16sp" />
+            android:layout_marginTop="12dp" />
 
         <EditText
             android:id="@+id/etPrecioPlatillo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ej. 45"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:hint="Ej. 60" />
 
-        <!-- Campo: Descripción -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Descripción:"
-            android:layout_marginTop="16dp"
             android:textStyle="bold"
-            android:textSize="16sp" />
+            android:layout_marginTop="12dp" />
 
         <EditText
             android:id="@+id/etDescripcionPlatillo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ej. Con piña y salsa verde" />
+            android:hint="Ej. Con crema y queso" />
 
-        <!-- Campo: Tipo (ahora con Spinner) -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tipo:"
-            android:layout_marginTop="16dp"
             android:textStyle="bold"
-            android:textSize="16sp" />
+            android:layout_marginTop="12dp" />
 
         <Spinner
             android:id="@+id/spinnerTipoPlatillo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Botón: Registrar -->
+
         <Button
-            android:id="@+id/btnRegistrarPlatillo"
+            android:id="@+id/btnActualizarPlatillo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="REGISTRAR"
+            android:text="ACTUALIZAR"
             android:textAllCaps="true"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white" />
+
+
+        <Button
+            android:id="@+id/btnEliminarPlatillo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ELIMINAR"
+            android:textAllCaps="true"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@android:color/holo_red_light"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </ScrollView>

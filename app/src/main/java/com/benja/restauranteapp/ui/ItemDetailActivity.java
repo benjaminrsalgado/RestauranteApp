@@ -1,4 +1,4 @@
-package com.benja.restauranteapp;
+package com.benja.restauranteapp.ui;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -7,9 +7,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.benja.restauranteapp.R;
+
 public class ItemDetailActivity extends AppCompatActivity {
 
-    private TextView nombreTextView, precioTextView, descripcionTextView;
+    private TextView nombreTextView, precioTextView, descripcionTextView, tipoTextView;
     private ImageView imagenView;
 
     @Override
@@ -17,33 +19,35 @@ public class ItemDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
 
-        // 🟩 Toolbar con flecha de regreso
+        // 🟦 Configurar toolbar con botón de regreso
         Toolbar toolbar = findViewById(R.id.toolbarDetalle);
         setSupportActionBar(toolbar);
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // 🟩 Referencias de UI
-        nombreTextView = findViewById(R.id.nombreComida);
-        precioTextView = findViewById(R.id.precioComida);
+        // 🟦 Referencias UI
+        nombreTextView      = findViewById(R.id.nombreComida);
+        precioTextView      = findViewById(R.id.precioComida);
         descripcionTextView = findViewById(R.id.descripcionComida);
-        imagenView = findViewById(R.id.imagenComida);
+        tipoTextView        = findViewById(R.id.tipoComida);
+        imagenView          = findViewById(R.id.imagenComida);
 
-        // 🟩 Obtener extras del intent
+        // 🟦 Obtener datos del intent
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String nombre = extras.getString("nombre", "Sin nombre");
-            double precio = extras.getDouble("precio", 0);
+            String nombre      = extras.getString("nombre", "Sin nombre");
+            double precio      = extras.getDouble("precio", 0);
             String descripcion = extras.getString("descripcion", "Sin descripción");
-            int imagenResId = extras.getInt("imagenResId", R.drawable.placeholder);
+            String tipo        = extras.getString("tipo", "Sin tipo");
+            int imagenResId    = extras.getInt("imagenResId", R.drawable.placeholder);
 
+            // 🟦 Mostrar en pantalla
             nombreTextView.setText(nombre);
             precioTextView.setText(String.format("$%.2f", precio));
             descripcionTextView.setText(descripcion);
+            tipoTextView.setText("Tipo: " + tipo);
             imagenView.setImageResource(imagenResId);
         }
     }

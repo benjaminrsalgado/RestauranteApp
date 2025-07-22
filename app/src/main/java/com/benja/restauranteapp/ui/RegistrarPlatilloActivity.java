@@ -2,8 +2,10 @@ package com.benja.restauranteapp.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +18,8 @@ import java.util.concurrent.Executors;
 
 public class RegistrarPlatilloActivity extends AppCompatActivity {
 
-    private EditText etNombre, etPrecio, etDescripcion, etTipo;
+    private EditText etNombre, etPrecio, etDescripcion;
+    private Spinner spinnerTipo;
     private Button btnRegistrar;
     private AppDatabase db;
     private int restaurantId;
@@ -27,48 +30,57 @@ public class RegistrarPlatilloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_platillo);
 
-        etNombre     = findViewById(R.id.etNombrePlatillo);
-        etPrecio     = findViewById(R.id.etPrecioPlatillo);
+        // Inicializar vistas
+        etNombre = findViewById(R.id.etNombrePlatillo);
+        etPrecio = findViewById(R.id.etPrecioPlatillo);
         etDescripcion = findViewById(R.id.etDescripcionPlatillo);
-        etTipo       = findViewById(R.id.etTipoPlatillo);
+        spinnerTipo = findViewById(R.id.spinnerTipoPlatillo);
         btnRegistrar = findViewById(R.id.btnRegistrarPlatillo);
+
         db = AppDatabase.getInstance(this);
 
         // Obtener datos del intent
-        restaurantId   = getIntent().getIntExtra("restaurantId", -1);
+        restaurantId = getIntent().getIntExtra("restaurantId", -1);
         restaurantName = getIntent().getStringExtra("restaurantName");
 
-        btnRegistrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String nombre = etNombre.getText().toString().trim();
-                String precioStr = etPrecio.getText().toString().trim();
-                String descripcion = etDescripcion.getText().toString().trim();
-                String tipo = etTipo.getText().toString().trim();
+        // Mostrar opciones bonitas en el Spinner
+        String[] opcionesVisibles = {"Comida", "Bebidas", "Complementos"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opcionesVisibles);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTipo.setAdapter(adapter);
 
-                if (nombre.isEmpty() || precioStr.isEmpty() || descripcion.isEmpty() || tipo.isEmpty()) {
-                    Toast.makeText(RegistrarPlatilloActivity.this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        btnRegistrar.setOnClickListener(v -> {
+            String nombre = etNombre.getText().toString().trim();
+            String precioStr = etPrecio.getText().toString().trim();
+            String descripcion = etDescripcion.getText().toString().trim();
 
-                double precio;
-                try {
-                    precio = Double.parseDouble(precioStr);
-                } catch (NumberFormatException e) {
-                    Toast.makeText(RegistrarPlatilloActivity.this, "Precio inválido", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                Food nuevo = new Food(nombre, precio, descripcion, tipo, restaurantName, restaurantId);
-
-                Executors.newSingleThreadExecutor().execute(() -> {
-                    db.foodDao().insert(nuevo);
-                    runOnUiThread(() -> {
-                        Toast.makeText(RegistrarPlatilloActivity.this, "Platillo registrado", Toast.LENGTH_SHORT).show();
-                        finish();
-                    });
-                });
+            if (nombre.isEmpty() || precioStr.isEmpty() || descripcion.isEmpty()) {
+                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            double precio;
+            try {
+                precio = Double.parseDouble(precioStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Precio inválido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Asignar valor interno correcto
+            String[] valoresInternos = {"comida", "bebida", "complemento"};
+            int selectedIndex = spinnerTipo.getSelectedItemPosition();
+            String tipo = valoresInternos[selectedIndex];
+
+            Food nuevo = new Food(nombre, precio, descripcion, tipo, restaurantName, restaurantId);
+
+            Executors.newSingleThreadExecutor().execute(() -> {
+                db.foodDao().insert(nuevo);
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Platillo registrado", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+            });
         });
     }
 }

@@ -8,8 +8,8 @@ import androidx.room.RoomDatabase;
 
 @Database(
         entities = {Restaurant.class, Food.class},
-        version = 1,
-        exportSchema = false // ← opcional para evitar advertencias al compilar
+        version = 2, // ← CAMBIADO de 1 a 2
+        exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -25,7 +25,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             AppDatabase.class,
                             "restaurante_db"
                     )
-                    .fallbackToDestructiveMigration() // ← útil en fase de desarrollo
+                    .fallbackToDestructiveMigration() // ← esto borra y recrea la DB automáticamente
                     .build();
         }
         return instance;

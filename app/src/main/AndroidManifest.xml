@@ -13,35 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestauranteApp">
 
-        <!-- 🟢 NUEVA ACTIVITY para registrar platillos -->
-        <activity
-            android:name=".ui.RegistrarPlatilloActivity"
-            android:exported="false" />
+        <!-- Activities de tu app -->
 
-        <activity
-            android:name=".ui.EditarRestauranteActivity"
-            android:exported="false" />
+        <activity android:name=".ui.RegistrarPlatilloActivity" android:exported="false" />
+        <activity android:name=".ui.EditarPlatilloActivity" android:exported="false" />
+        <activity android:name=".ui.EditarRestauranteActivity" android:exported="false" />
+        <activity android:name=".ui.RegistrarRestauranteActivity" android:exported="false" />
 
-        <activity
-            android:name=".ui.RegistrarRestauranteActivity"
-            android:exported="false" />
+        <!-- ✅ Esta línea era necesaria para evitar el crash -->
+        <activity android:name=".ui.ItemDetailActivity" android:exported="false" />
 
-        <activity
-            android:name=".ui.RestaurantListActivity"
-            android:exported="true">
+        <activity android:name=".ui.RestaurantMenuActivity" android:exported="true" />
+
+        <activity android:name=".ui.RestaurantListActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.RestaurantMenuActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".ui.ItemDetailActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

@@ -24,7 +24,7 @@ public class RestaurantListActivity extends AppCompatActivity {
 
     private AppDatabase db;
     private ArrayAdapter<String> adapter;
-    private final List<String> nombresRestaurantes = new ArrayList<>();
+    private List<Restaurant> listaRestaurantes = new ArrayList<>();
 
     private ListView listView;
     private SearchView searchView;
@@ -43,7 +43,7 @@ public class RestaurantListActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchViewRestaurantes);
         fabAgregar = findViewById(R.id.fabAgregarRestaurante);
 
-        // ⚠️ Usamos un ArrayAdapter vacío temporalmente, se llena después
+        // ✅ Importante: NO usar lista externa, usa lista interna del adapter
         adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -72,13 +72,32 @@ public class RestaurantListActivity extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemLongClickListener((p, v, pos, id) -> {
+            String nombre = adapter.getItem(pos);
+            if (nombre == null) return false;
+
+            // Buscar restaurante por nombre directamente
+            for (Restaurant r : listaRestaurantes) {
+                if (r.name.equals(nombre)) {
+                    Intent i = new Intent(this, EditarRestauranteActivity.class);
+                    i.putExtra("restaurantId", r.id);
+                    i.putExtra("restaurantName", r.name);
+                    startActivity(i);
+                    return true;
+                }
+            }
+
+            Toast.makeText(this, "Restaurante no encontrado", Toast.LENGTH_SHORT).show();
+            return true;
+        });
+
         sembrarDatosDemo();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        cargarRestaurantes(); // se recarga al volver
+        cargarRestaurantes();
     }
 
     private void cargarRestaurantes() {
@@ -86,18 +105,17 @@ public class RestaurantListActivity extends AppCompatActivity {
             List<Restaurant> lista = db.restaurantDao().getAll();
             Log.d(TAG, "Total restaurantes: " + lista.size());
 
-            nombresRestaurantes.clear();
-            for (Restaurant r : lista) {
-                Log.d(TAG, "-> " + r.name);
-                nombresRestaurantes.add(r.name);
-            }
+            listaRestaurantes.clear();
+            listaRestaurantes.addAll(lista);
 
             runOnUiThread(() -> {
                 adapter.clear();
-                adapter.addAll(nombresRestaurantes);
+                for (Restaurant r : listaRestaurantes) {
+                    adapter.add(r.name);
+                }
                 adapter.notifyDataSetChanged();
 
-                if (nombresRestaurantes.isEmpty()) {
+                if (listaRestaurantes.isEmpty()) {
                     Toast.makeText(this, "No hay restaurantes registrados", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -105,15 +123,12 @@ public class RestaurantListActivity extends AppCompatActivity {
     }
 
     private void filtrarEnLista(String texto) {
-        List<String> filtrados = new ArrayList<>();
-        for (String n : nombresRestaurantes) {
-            if (n.toLowerCase().contains(texto.toLowerCase())) {
-                filtrados.add(n);
+        adapter.clear();
+        for (Restaurant r : listaRestaurantes) {
+            if (r.name.toLowerCase().contains(texto.toLowerCase())) {
+                adapter.add(r.name);
             }
         }
-
-        adapter.clear();
-        adapter.addAll(filtrados);
         adapter.notifyDataSetChanged();
     }
 
@@ -136,7 +151,6 @@ public class RestaurantListActivity extends AppCompatActivity {
             db.foodDao().insert(new Food("Guacamole", 30, "Aguacate", "complement", "Mexican Restaurant", idMex));
             db.foodDao().insert(new Food("Vino Tinto", 120, "Vino de la casa", "drink", "Italian Restaurant", idIta));
 
-            // ✅ Refresca la UI después de sembrar
             runOnUiThread(this::cargarRestaurantes);
         });
     }

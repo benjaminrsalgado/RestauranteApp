@@ -12,22 +12,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestauranteApp">
+
+
+        <activity
+            android:name=".ui.EditarRestauranteActivity"
+            android:exported="false" />
+
         <activity
             android:name=".ui.RegistrarRestauranteActivity"
             android:exported="false" />
-        <!-- Pantalla principal al inicio -->
+
+
         <activity
             android:name=".ui.RestaurantListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Pantalla con tabs -->
+        </activity>
+
+
         <activity
             android:name=".ui.RestaurantMenuActivity"
-            android:exported="true" /> <!-- Pantalla de detalle al tocar un platillo -->
+            android:exported="true" />
+
+
         <activity
             android:name=".ui.ItemDetailActivity"
             android:exported="false" />

@@ -9,32 +9,43 @@
 
     <!-- Toolbar con botón de regreso -->
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarEditar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:title="Registrar nuevo restaurante"
+        app:title="Editar restaurante"
         app:titleTextColor="@android:color/white"
         app:navigationIcon="@drawable/ic_arrow_back" />
 
-    <!-- Campo para nombre del restaurante -->
+    <!-- Campo editable con el nombre -->
     <EditText
-        android:id="@+id/etNuevoRestaurante"
+        android:id="@+id/etEditarNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre del restaurante"
+        android:hint="Nuevo nombre"
         android:padding="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp" />
 
-    <!-- Botón para registrar -->
+    <!-- Botón para actualizar -->
     <Button
-        android:id="@+id/btnRegistrarRestaurante"
+        android:id="@+id/btnActualizar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registrar"
+        android:text="Actualizar"
         android:backgroundTint="@color/purple_500"
         android:textColor="@android:color/white"
-        android:padding="12dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:padding="12dp" />
+
+    <!-- Botón para eliminar -->
+    <Button
+        android:id="@+id/btnEliminar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
+        android:padding="12dp" />
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.benja.restauranteapp.R;
 import com.benja.restauranteapp.db.AppDatabase;
@@ -24,10 +25,22 @@ public class RegistrarRestauranteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_restaurante);
 
+        // ───────────── Toolbar con botón de regreso ─────────────
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // flecha
+        }
+
+        toolbar.setNavigationOnClickListener(v -> finish()); // acción al presionar flecha
+
+        // ───────────── Referencias UI ─────────────
         etNuevoRestaurante = findViewById(R.id.etNuevoRestaurante);
         btnRegistrar = findViewById(R.id.btnRegistrarRestaurante);
         db = AppDatabase.getInstance(this);
 
+        // ───────────── Acción al registrar ─────────────
         btnRegistrar.setOnClickListener(v -> {
             String nombre = etNuevoRestaurante.getText().toString().trim();
 
@@ -43,7 +56,7 @@ public class RegistrarRestauranteActivity extends AppCompatActivity {
 
                 runOnUiThread(() -> {
                     Toast.makeText(this, "Restaurante registrado", Toast.LENGTH_SHORT).show();
-                    finish(); // vuelve a la lista
+                    finish(); // volver a la lista
                 });
             });
         });

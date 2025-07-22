@@ -1,5 +1,6 @@
 package com.benja.restauranteapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,8 +12,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.benja.restauranteapp.R;
 import com.benja.restauranteapp.adapters.MenuPagerAdapter;
+import com.benja.restauranteapp.db.AppDatabase;
+import com.benja.restauranteapp.db.Restaurant;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.concurrent.Executors;
 
 public class RestaurantMenuActivity extends AppCompatActivity {
 
@@ -20,6 +26,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
     private MenuPagerAdapter pagerAdapter;
     private String nombreRestaurante;
+    private int restaurantId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,14 @@ public class RestaurantMenuActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(nombreRestaurante);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        // Buscar restaurantId en la base de datos
+        Executors.newSingleThreadExecutor().execute(() -> {
+            Restaurant r = AppDatabase.getInstance(this).restaurantDao().getByName(nombreRestaurante);
+            if (r != null) {
+                restaurantId = r.id;
+            }
+        });
 
         // Configurar tabs y ViewPager2
         tabLayout = findViewById(R.id.tabLayout);
@@ -57,6 +72,15 @@ public class RestaurantMenuActivity extends AppCompatActivity {
                     break;
             }
         }).attach();
+
+        // Agregar botón flotante para registrar platillo
+        FloatingActionButton fab = findViewById(R.id.fabAgregarPlatillo);
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(this, RegistrarPlatilloActivity.class);
+            intent.putExtra("restaurantId", restaurantId);
+            intent.putExtra("restaurantName", nombreRestaurante);
+            startActivity(intent);
+        });
     }
 
     @Override

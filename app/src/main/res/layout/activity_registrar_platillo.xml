@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarRegistrar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:title="Nuevo platillo"
+            android:titleTextColor="@android:color/white"
+            android:navigationIcon="@drawable/ic_arrow_back" />
+
+        <!-- Campo: Nombre -->
+        <TextView
+            android:text="Nombre:"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/etNombrePlatillo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej. Tacos al pastor" />
+
+        <!-- Campo: Precio -->
+        <TextView
+            android:text="Precio:"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/etPrecioPlatillo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej. 45"
+            android:inputType="numberDecimal" />
+
+        <!-- Campo: Descripción -->
+        <TextView
+            android:text="Descripción:"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/etDescripcionPlatillo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej. Con piña y salsa verde" />
+
+        <!-- Campo: Tipo -->
+        <TextView
+            android:text="Tipo:"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/etTipoPlatillo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej. food, drink, complement" />
+
+        <!-- Botón: Registrar -->
+        <Button
+            android:id="@+id/btnRegistrarPlatillo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="REGISTRAR"
+            android:textAllCaps="true"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</ScrollView>

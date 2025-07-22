@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestauranteApp">
 
+        <!-- 🟢 NUEVA ACTIVITY para registrar platillos -->
+        <activity
+            android:name=".ui.RegistrarPlatilloActivity"
+            android:exported="false" />
 
         <activity
             android:name=".ui.EditarRestauranteActivity"
@@ -21,7 +25,6 @@
         <activity
             android:name=".ui.RegistrarRestauranteActivity"
             android:exported="false" />
-
 
         <activity
             android:name=".ui.RestaurantListActivity"
@@ -32,11 +35,9 @@
             </intent-filter>
         </activity>
 
-
         <activity
             android:name=".ui.RestaurantMenuActivity"
             android:exported="true" />
-
 
         <activity
             android:name=".ui.ItemDetailActivity"

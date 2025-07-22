@@ -8,6 +8,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.benja.restauranteapp.R;
 import com.benja.restauranteapp.db.AppDatabase;
@@ -30,6 +31,13 @@ public class EditarPlatilloActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_platillo);
+
+        // ✅ Toolbar con flechita
+        Toolbar toolbar = findViewById(R.id.toolbarEditarPlatillo);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         // 🔹 Referencias UI
         etNombre = findViewById(R.id.etNombrePlatillo);

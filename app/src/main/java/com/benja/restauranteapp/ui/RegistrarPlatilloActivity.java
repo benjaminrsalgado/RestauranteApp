@@ -1,7 +1,6 @@
 package com.benja.restauranteapp.ui;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +8,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.benja.restauranteapp.R;
 import com.benja.restauranteapp.db.AppDatabase;
@@ -30,7 +30,15 @@ public class RegistrarPlatilloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_platillo);
 
-        // Inicializar vistas
+        // ✅ Toolbar con flecha de regreso
+        Toolbar toolbar = findViewById(R.id.toolbarRegistrar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Muestra la flechita
+        }
+        toolbar.setNavigationOnClickListener(v -> finish()); // Hace que al tocar la flecha regrese
+
+        // 🔹 Inicializar vistas
         etNombre = findViewById(R.id.etNombrePlatillo);
         etPrecio = findViewById(R.id.etPrecioPlatillo);
         etDescripcion = findViewById(R.id.etDescripcionPlatillo);
@@ -39,16 +47,17 @@ public class RegistrarPlatilloActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
-        // Obtener datos del intent
+        // 🔹 Obtener datos del intent
         restaurantId = getIntent().getIntExtra("restaurantId", -1);
         restaurantName = getIntent().getStringExtra("restaurantName");
 
-        // Mostrar opciones bonitas en el Spinner
+        // 🔹 Mostrar opciones en el Spinner
         String[] opcionesVisibles = {"Comida", "Bebidas", "Complementos"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opcionesVisibles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipo.setAdapter(adapter);
 
+        // 🔹 Botón registrar
         btnRegistrar.setOnClickListener(v -> {
             String nombre = etNombre.getText().toString().trim();
             String precioStr = etPrecio.getText().toString().trim();
@@ -67,7 +76,7 @@ public class RegistrarPlatilloActivity extends AppCompatActivity {
                 return;
             }
 
-            // Asignar valor interno correcto
+            // 🔹 Obtener tipo correcto
             String[] valoresInternos = {"comida", "bebida", "complemento"};
             int selectedIndex = spinnerTipo.getSelectedItemPosition();
             String tipo = valoresInternos[selectedIndex];

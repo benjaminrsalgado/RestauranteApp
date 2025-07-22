@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Toolbar -->
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarRegistrar"
             android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:titleTextColor="@android:color/white"
             android:navigationIcon="@drawable/ic_arrow_back" />
 
-        <!-- Campo: Nombre -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:hint="Ej. Tacos al pastor" />
 
-        <!-- Campo: Precio -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:hint="Ej. Con piña y salsa verde" />
 
-        <!-- Campo: Tipo (ahora con Spinner) -->
+        <!-- Campo: Tipo -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,10 +75,11 @@
             android:textStyle="bold"
             android:textSize="16sp" />
 
-        <Spinner
-            android:id="@+id/spinnerTipoPlatillo"
+        <EditText
+            android:id="@+id/etTipoPlatillo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="Ej. food, drink, complement" />
 
         <!-- Botón: Registrar -->
         <Button

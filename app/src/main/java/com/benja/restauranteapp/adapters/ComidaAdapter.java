@@ -67,6 +67,7 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
         }
     }
 
+    // ✅ Método para filtrar por texto ingresado
     public void filtrar(String texto) {
         texto = texto.toLowerCase();
         listaComida.clear();
@@ -80,6 +81,17 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
                 }
             }
         }
+
+        notifyDataSetChanged();
+    }
+
+    // ✅ Método para actualizar la lista completa desde la base
+    public void actualizarLista(List<Food> nuevaLista) {
+        listaComida.clear();
+        listaComida.addAll(nuevaLista);
+
+        listaCompleta.clear();
+        listaCompleta.addAll(nuevaLista);
 
         notifyDataSetChanged();
     }

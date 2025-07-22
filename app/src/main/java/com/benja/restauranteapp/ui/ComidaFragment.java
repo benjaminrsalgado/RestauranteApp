@@ -57,27 +57,32 @@ public class ComidaFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        cargarComidaDesdeDB();
+    }
+
     private void cargarComidaDesdeDB() {
         Executors.newSingleThreadExecutor().execute(() -> {
             AppDatabase db = AppDatabase.getInstance(requireContext());
 
-            // Buscar el restaurante por nombre
             Restaurant restaurante = db.restaurantDao().getByName(nombreRestaurante);
             if (restaurante == null) return;
 
-            // Obtener la lista de alimentos filtrados por tipo y restaurante
             List<Food> resultado = db.foodDao().getByTypeAndRestaurant(tipo, restaurante.id);
 
-            // Actualizar la interfaz en el hilo principal
             requireActivity().runOnUiThread(() -> {
-                listaComida.clear();
-                listaComida.addAll(resultado);
-                adapter.notifyDataSetChanged();
+                adapter.actualizarLista(resultado); // ✅ usa este método para actualizar todo
             });
         });
     }
 
-    // Método público que llama al filtro del adapter
+    // ✅ ESTE método era el que te faltaba
+    public void recargarDesdeDB() {
+        cargarComidaDesdeDB();
+    }
+
     public void filtrarPorTexto(String texto) {
         if (adapter != null) {
             adapter.filtrar(texto);

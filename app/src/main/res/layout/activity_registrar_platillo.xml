@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Toolbar -->
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarRegistrar"
             android:layout_width="match_parent"
@@ -20,24 +20,30 @@
             android:titleTextColor="@android:color/white"
             android:navigationIcon="@drawable/ic_arrow_back" />
 
-        <!-- Campo: Nombre -->
+
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Nombre:"
             android:layout_marginTop="16dp"
             android:textStyle="bold"
             android:textSize="16sp" />
+
         <EditText
             android:id="@+id/etNombrePlatillo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ej. Tacos al pastor" />
 
-        <!-- Campo: Precio -->
+
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Precio:"
             android:layout_marginTop="16dp"
             android:textStyle="bold"
             android:textSize="16sp" />
+
         <EditText
             android:id="@+id/etPrecioPlatillo"
             android:layout_width="match_parent"
@@ -47,10 +53,13 @@
 
         <!-- Campo: Descripción -->
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Descripción:"
             android:layout_marginTop="16dp"
             android:textStyle="bold"
             android:textSize="16sp" />
+
         <EditText
             android:id="@+id/etDescripcionPlatillo"
             android:layout_width="match_parent"
@@ -59,10 +68,13 @@
 
         <!-- Campo: Tipo -->
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Tipo:"
             android:layout_marginTop="16dp"
             android:textStyle="bold"
             android:textSize="16sp" />
+
         <EditText
             android:id="@+id/etTipoPlatillo"
             android:layout_width="match_parent"

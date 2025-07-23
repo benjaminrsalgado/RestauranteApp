@@ -43,7 +43,7 @@ public class RestaurantListActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchViewRestaurantes);
         fabAgregar = findViewById(R.id.fabAgregarRestaurante);
 
-        // ✅ Importante: NO usar lista externa, usa lista interna del adapter
+
         adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -76,7 +76,7 @@ public class RestaurantListActivity extends AppCompatActivity {
             String nombre = adapter.getItem(pos);
             if (nombre == null) return false;
 
-            // Buscar restaurante por nombre directamente
+
             for (Restaurant r : listaRestaurantes) {
                 if (r.name.equals(nombre)) {
                     Intent i = new Intent(this, EditarRestauranteActivity.class);

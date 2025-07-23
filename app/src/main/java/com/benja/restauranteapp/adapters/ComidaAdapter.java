@@ -55,7 +55,7 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
         holder.txtNombreComida.setText(comida.getName());
         holder.txtPrecioComida.setText(String.format("$ %.2f", comida.getPrice()));
 
-        // Click corto → detalle
+
         holder.itemView.setOnClickListener(v -> {
             Context ctx = v.getContext();
             Intent intent = new Intent(ctx, ItemDetailActivity.class);
@@ -67,7 +67,7 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.ComidaView
             ctx.startActivity(intent);
         });
 
-        // Long click → editar/eliminar
+
         holder.itemView.setOnLongClickListener(v -> {
             Context ctx = v.getContext();
 

@@ -32,14 +32,14 @@ public class EditarPlatilloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_platillo);
 
-        // ✅ Toolbar con flechita
+
         Toolbar toolbar = findViewById(R.id.toolbarEditarPlatillo);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // 🔹 Referencias UI
+
         etNombre = findViewById(R.id.etNombrePlatillo);
         etPrecio = findViewById(R.id.etPrecioPlatillo);
         etDescripcion = findViewById(R.id.etDescripcionPlatillo);
@@ -47,40 +47,40 @@ public class EditarPlatilloActivity extends AppCompatActivity {
         btnActualizar = findViewById(R.id.btnActualizarPlatillo);
         btnEliminar = findViewById(R.id.btnEliminarPlatillo);
 
-        // 🔹 Base de datos
+
         db = AppDatabase.getInstance(this);
 
-        // 🔹 Opciones para el Spinner
+
         String[] tipos = {"comida", "bebida", "complemento"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipo.setAdapter(adapter);
 
-        // 🔹 Obtener datos del intent
+
         foodId = getIntent().getIntExtra("id", -1);
         restaurantId = getIntent().getIntExtra("restaurantId", -1);
         restaurantName = getIntent().getStringExtra("restaurantName");
 
-        // 🛑 Validación de seguridad
+
         if (foodId == -1 || restaurantId == -1 || restaurantName == null) {
             Toast.makeText(this, "Error al cargar el platillo", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        // 🔹 Rellenar campos
+
         etNombre.setText(getIntent().getStringExtra("nombre"));
         etPrecio.setText(String.valueOf(getIntent().getDoubleExtra("precio", 0)));
         etDescripcion.setText(getIntent().getStringExtra("descripcion"));
 
-        // 🔹 Seleccionar tipo en el Spinner
+
         String tipo = getIntent().getStringExtra("tipo");
         if (tipo != null) {
             int index = adapter.getPosition(tipo.toLowerCase());
             if (index >= 0) spinnerTipo.setSelection(index);
         }
 
-        // 🔹 Botón actualizar
+
         btnActualizar.setOnClickListener(v -> {
             String nuevoNombre = etNombre.getText().toString().trim();
             String precioStr = etPrecio.getText().toString().trim();
@@ -111,7 +111,7 @@ public class EditarPlatilloActivity extends AppCompatActivity {
             });
         });
 
-        // 🔹 Botón eliminar
+
         btnEliminar.setOnClickListener(v -> {
             Executors.newSingleThreadExecutor().execute(() -> {
                 db.foodDao().deleteById(foodId);

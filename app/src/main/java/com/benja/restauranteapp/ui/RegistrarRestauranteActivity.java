@@ -25,22 +25,22 @@ public class RegistrarRestauranteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_restaurante);
 
-        // ───────────── Toolbar con botón de regreso ─────────────
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // flecha
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        toolbar.setNavigationOnClickListener(v -> finish()); // acción al presionar flecha
+        toolbar.setNavigationOnClickListener(v -> finish());
 
-        // ───────────── Referencias UI ─────────────
+
         etNuevoRestaurante = findViewById(R.id.etNuevoRestaurante);
         btnRegistrar = findViewById(R.id.btnRegistrarRestaurante);
         db = AppDatabase.getInstance(this);
 
-        // ───────────── Acción al registrar ─────────────
+
         btnRegistrar.setOnClickListener(v -> {
             String nombre = etNuevoRestaurante.getText().toString().trim();
 
@@ -56,7 +56,7 @@ public class RegistrarRestauranteActivity extends AppCompatActivity {
 
                 runOnUiThread(() -> {
                     Toast.makeText(this, "Restaurante registrado", Toast.LENGTH_SHORT).show();
-                    finish(); // volver a la lista
+                    finish();
                 });
             });
         });

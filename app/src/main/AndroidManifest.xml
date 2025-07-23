@@ -13,14 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestauranteApp">
 
-        <!-- Activities de tu app -->
+
 
         <activity android:name=".ui.RegistrarPlatilloActivity" android:exported="false" />
         <activity android:name=".ui.EditarPlatilloActivity" android:exported="false" />
         <activity android:name=".ui.EditarRestauranteActivity" android:exported="false" />
         <activity android:name=".ui.RegistrarRestauranteActivity" android:exported="false" />
 
-        <!-- ✅ Esta línea era necesaria para evitar el crash -->
+
         <activity android:name=".ui.ItemDetailActivity" android:exported="false" />
 
         <activity android:name=".ui.RestaurantMenuActivity" android:exported="true" />

@@ -52,14 +52,14 @@ public class MenuPagerAdapter extends FragmentStateAdapter {
         return 3;
     }
 
-    // ✅ Para filtrar texto en la pestaña actual
+
     public void filtrarEnFragment(int position, String texto) {
         if (position >= 0 && position < fragments.length && fragments[position] != null) {
             fragments[position].filtrarPorTexto(texto);
         }
     }
 
-    // ✅ Para recargar datos del fragmento actual (al volver del registro de platillo)
+
     public void recargarFragment(int position) {
         if (position >= 0 && position < fragments.length && fragments[position] != null) {
             fragments[position].recargarDesdeDB();

@@ -70,7 +70,7 @@
             android:textStyle="bold"
             android:textSize="16sp" />
 
-        <!-- ✅ Spinner CORRECTO -->
+
         <Spinner
             android:id="@+id/spinnerTipoPlatillo"
             android:layout_width="match_parent"

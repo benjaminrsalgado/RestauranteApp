@@ -11,22 +11,22 @@ import java.util.List;
 @Dao
 public interface RestaurantDao {
 
-    // ───────────── Inserción ─────────────
+
     @Insert
     void insert(Restaurant restaurant);
 
-    // ───────────── Actualización ─────────────
+
     @Update
     void update(Restaurant restaurant);
 
-    // ───────────── Eliminación ─────────────
+
     @Delete
     void delete(Restaurant restaurant);
 
     @Query("DELETE FROM restaurant")
     void deleteAll();
 
-    // ───────────── Consultas ─────────────
+
     @Query("SELECT * FROM restaurant")
     List<Restaurant> getAll();
 

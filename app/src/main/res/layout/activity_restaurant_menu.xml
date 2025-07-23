@@ -34,7 +34,7 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <!-- ✅ FAB para agregar platillo -->
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAgregarPlatillo"
         android:layout_width="wrap_content"

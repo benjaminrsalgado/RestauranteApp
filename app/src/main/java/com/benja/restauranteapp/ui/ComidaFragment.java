@@ -31,7 +31,7 @@ public class ComidaFragment extends Fragment {
     private String nombreRestaurante = "";
 
     public ComidaFragment() {
-        // Constructor vacío requerido por FragmentManager
+
     }
 
     @Nullable
@@ -46,7 +46,7 @@ public class ComidaFragment extends Fragment {
         adapter = new ComidaAdapter(listaComida);
         recyclerView.setAdapter(adapter);
 
-        // Recuperar argumentos pasados desde MenuPagerAdapter
+
         if (getArguments() != null) {
             tipo = getArguments().getString("tipo", "comida");
             nombreRestaurante = getArguments().getString("nombreRestaurante", "");
@@ -73,12 +73,12 @@ public class ComidaFragment extends Fragment {
             List<Food> resultado = db.foodDao().getByTypeAndRestaurant(tipo, restaurante.id);
 
             requireActivity().runOnUiThread(() -> {
-                adapter.actualizarLista(resultado); // ✅ usa este método para actualizar todo
+                adapter.actualizarLista(resultado);
             });
         });
     }
 
-    // ✅ ESTE método era el que te faltaba
+
     public void recargarDesdeDB() {
         cargarComidaDesdeDB();
     }

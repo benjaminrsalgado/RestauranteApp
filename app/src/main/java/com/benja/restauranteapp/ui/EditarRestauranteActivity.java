@@ -29,7 +29,7 @@ public class EditarRestauranteActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
-        // Toolbar con botón de regreso
+
         Toolbar toolbar = findViewById(R.id.toolbarEditar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -37,17 +37,17 @@ public class EditarRestauranteActivity extends AppCompatActivity {
         }
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // Referencias UI
+
         etEditarNombre = findViewById(R.id.etEditarNombre);
         btnActualizar = findViewById(R.id.btnActualizar);
         btnEliminar = findViewById(R.id.btnEliminar);
 
-        // Recibir datos del intent
+
         restaurantId = getIntent().getIntExtra("restaurantId", -1);
         oldName = getIntent().getStringExtra("restaurantName");
         etEditarNombre.setText(oldName);
 
-        // Botón actualizar
+
         btnActualizar.setOnClickListener(v -> {
             String nuevoNombre = etEditarNombre.getText().toString().trim();
             if (nuevoNombre.isEmpty()) {
@@ -68,7 +68,7 @@ public class EditarRestauranteActivity extends AppCompatActivity {
             });
         });
 
-        // Botón eliminar
+
         btnEliminar.setOnClickListener(v -> {
             Executors.newSingleThreadExecutor().execute(() -> {
                 Restaurant r = new Restaurant();

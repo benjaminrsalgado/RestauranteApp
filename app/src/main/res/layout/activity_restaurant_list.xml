@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#FFF7FF"> <!-- fondo general -->
+    android:background="#FFF7FF">
 
-    <!-- Título + Buscador -->
+
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -32,16 +32,16 @@
             android:queryHint="Buscar" />
     </LinearLayout>
 
-    <!-- Lista de restaurantes -->
+
     <ListView
         android:id="@+id/restaurantListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginBottom="8dp"
-        android:background="#FFEEEE" /> <!-- color para depurar -->
+        android:background="#FFEEEE" />
 
-    <!-- Botón flotante para agregar restaurante -->
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAgregarRestaurante"
         android:layout_width="wrap_content"

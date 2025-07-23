@@ -30,15 +30,15 @@ public class RegistrarPlatilloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_platillo);
 
-        // ✅ Toolbar con flecha de regreso
+
         Toolbar toolbar = findViewById(R.id.toolbarRegistrar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Muestra la flechita
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(v -> finish()); // Hace que al tocar la flecha regrese
+        toolbar.setNavigationOnClickListener(v -> finish());
 
-        // 🔹 Inicializar vistas
+
         etNombre = findViewById(R.id.etNombrePlatillo);
         etPrecio = findViewById(R.id.etPrecioPlatillo);
         etDescripcion = findViewById(R.id.etDescripcionPlatillo);
@@ -47,17 +47,17 @@ public class RegistrarPlatilloActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
-        // 🔹 Obtener datos del intent
+
         restaurantId = getIntent().getIntExtra("restaurantId", -1);
         restaurantName = getIntent().getStringExtra("restaurantName");
 
-        // 🔹 Mostrar opciones en el Spinner
+
         String[] opcionesVisibles = {"Comida", "Bebidas", "Complementos"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opcionesVisibles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipo.setAdapter(adapter);
 
-        // 🔹 Botón registrar
+
         btnRegistrar.setOnClickListener(v -> {
             String nombre = etNombre.getText().toString().trim();
             String precioStr = etPrecio.getText().toString().trim();
@@ -76,7 +76,7 @@ public class RegistrarPlatilloActivity extends AppCompatActivity {
                 return;
             }
 
-            // 🔹 Obtener tipo correcto
+
             String[] valoresInternos = {"comida", "bebida", "complemento"};
             int selectedIndex = spinnerTipo.getSelectedItemPosition();
             String tipo = valoresInternos[selectedIndex];

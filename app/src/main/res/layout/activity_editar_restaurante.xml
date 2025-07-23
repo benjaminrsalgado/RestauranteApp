@@ -7,7 +7,7 @@
     android:padding="16dp"
     android:background="@android:color/white">
 
-    <!-- Toolbar con botón de regreso -->
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarEditar"
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         app:titleTextColor="@android:color/white"
         app:navigationIcon="@drawable/ic_arrow_back" />
 
-    <!-- Campo editable con el nombre -->
+
     <EditText
         android:id="@+id/etEditarNombre"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp" />
 
-    <!-- Botón para actualizar -->
+
     <Button
         android:id="@+id/btnActualizar"
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:layout_marginTop="8dp"
         android:padding="12dp" />
 
-    <!-- Botón para eliminar -->
+
     <Button
         android:id="@+id/btnEliminar"
         android:layout_width="match_parent"

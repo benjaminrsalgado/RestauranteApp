@@ -16,11 +16,11 @@ public class Food {
     private String restaurantName;
     private int restaurantId;
 
-    // 🔧 Constructor vacío requerido por Room (¡muy importante!)
+
     public Food() {
     }
 
-    // Constructor sin ID (para insertar nuevos platillos)
+
     public Food(String name, double price, String description, String type, String restaurantName, int restaurantId) {
         this.name = name;
         this.price = price;
@@ -30,7 +30,7 @@ public class Food {
         this.restaurantId = restaurantId;
     }
 
-    // Constructor con ID (para actualizar platillos existentes)
+
     public Food(int id, String name, double price, String description, String type, String restaurantName, int restaurantId) {
         this.id = id;
         this.name = name;
@@ -41,7 +41,7 @@ public class Food {
         this.restaurantId = restaurantId;
     }
 
-    // Getters
+
     public int getId() {
         return id;
     }
@@ -70,7 +70,7 @@ public class Food {
         return restaurantId;
     }
 
-    // ✅ Setters requeridos por Room
+
     public void setId(int id) {
         this.id = id;
     }

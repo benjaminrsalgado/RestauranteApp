@@ -37,10 +37,10 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_menu);
 
-        // 🔹 Recuperar nombre del intent
+
         nombreRestaurante = getIntent().getStringExtra("nombreRestaurante");
 
-        // 🔹 Toolbar con flechita
+
         Toolbar toolbar = findViewById(R.id.toolbarRestaurante);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -48,13 +48,13 @@ public class RestaurantMenuActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // 🔹 Inicializar views
+
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         fab = findViewById(R.id.fabAgregarPlatillo);
-        fab.setEnabled(false); // Desactivar botón hasta tener el ID
+        fab.setEnabled(false);
 
-        // 🔹 Adapter de las pestañas
+
         pagerAdapter = new MenuPagerAdapter(this, nombreRestaurante);
         viewPager.setAdapter(pagerAdapter);
 
@@ -66,13 +66,13 @@ public class RestaurantMenuActivity extends AppCompatActivity {
             }
         }).attach();
 
-        // 🔹 Obtener restaurantId y configurar botón flotante
+
         executor.execute(() -> {
             Restaurant r = AppDatabase.getInstance(this).restaurantDao().getByName(nombreRestaurante);
             if (r != null) {
                 restaurantId = r.id;
 
-                // ✅ Configurar botón flotante ya que se obtuvo el ID
+
                 runOnUiThread(() -> {
                     fab.setEnabled(true);
                     fab.setOnClickListener(v -> {

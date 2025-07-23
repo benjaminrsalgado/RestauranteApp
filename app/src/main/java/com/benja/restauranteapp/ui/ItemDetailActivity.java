@@ -19,7 +19,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
 
-        // 🟦 Configurar toolbar con botón de regreso
+
         Toolbar toolbar = findViewById(R.id.toolbarDetalle);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -27,14 +27,14 @@ public class ItemDetailActivity extends AppCompatActivity {
         }
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // 🟦 Referencias UI
+
         nombreTextView      = findViewById(R.id.nombreComida);
         precioTextView      = findViewById(R.id.precioComida);
         descripcionTextView = findViewById(R.id.descripcionComida);
         tipoTextView        = findViewById(R.id.tipoComida);
         imagenView          = findViewById(R.id.imagenComida);
 
-        // 🟦 Obtener datos del intent
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String nombre      = extras.getString("nombre", "Sin nombre");
@@ -43,7 +43,7 @@ public class ItemDetailActivity extends AppCompatActivity {
             String tipo        = extras.getString("tipo", "Sin tipo");
             int imagenResId    = extras.getInt("imagenResId", R.drawable.placeholder);
 
-            // 🟦 Mostrar en pantalla
+
             nombreTextView.setText(nombre);
             precioTextView.setText(String.format("$%.2f", precio));
             descripcionTextView.setText(descripcion);

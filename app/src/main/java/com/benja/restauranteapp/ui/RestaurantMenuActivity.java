@@ -37,9 +37,10 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_menu);
 
+        // 🔹 Recuperar nombre del intent
         nombreRestaurante = getIntent().getStringExtra("nombreRestaurante");
 
-        // Toolbar
+        // 🔹 Toolbar con flechita
         Toolbar toolbar = findViewById(R.id.toolbarRestaurante);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -47,17 +48,13 @@ public class RestaurantMenuActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // Obtener el ID del restaurante desde la base de datos
-        executor.execute(() -> {
-            Restaurant r = AppDatabase.getInstance(this).restaurantDao().getByName(nombreRestaurante);
-            if (r != null) {
-                restaurantId = r.id;
-            }
-        });
-
-        // Tabs y ViewPager
+        // 🔹 Inicializar views
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
+        fab = findViewById(R.id.fabAgregarPlatillo);
+        fab.setEnabled(false); // Desactivar botón hasta tener el ID
+
+        // 🔹 Adapter de las pestañas
         pagerAdapter = new MenuPagerAdapter(this, nombreRestaurante);
         viewPager.setAdapter(pagerAdapter);
 
@@ -69,21 +66,27 @@ public class RestaurantMenuActivity extends AppCompatActivity {
             }
         }).attach();
 
-        // Botón flotante para agregar platillo
-        fab = findViewById(R.id.fabAgregarPlatillo);
-        fab.setOnClickListener(v -> {
-            if (restaurantId == -1) {
-                return;
-            }
+        // 🔹 Obtener restaurantId y configurar botón flotante
+        executor.execute(() -> {
+            Restaurant r = AppDatabase.getInstance(this).restaurantDao().getByName(nombreRestaurante);
+            if (r != null) {
+                restaurantId = r.id;
 
-            Intent intent = new Intent(this, RegistrarPlatilloActivity.class);
-            intent.putExtra("restaurantId", restaurantId);
-            intent.putExtra("restaurantName", nombreRestaurante);
-            startActivity(intent);
+                // ✅ Configurar botón flotante ya que se obtuvo el ID
+                runOnUiThread(() -> {
+                    fab.setEnabled(true);
+                    fab.setOnClickListener(v -> {
+                        Intent intent = new Intent(this, RegistrarPlatilloActivity.class);
+                        intent.putExtra("restaurantId", restaurantId);
+                        intent.putExtra("restaurantName", nombreRestaurante);
+                        startActivity(intent);
+                    });
+                });
+            }
         });
     }
 
-    // 🔁 Cuando regresa de otra pantalla, recarga el fragmento actual
+    // 🔁 Al volver de otra pantalla, recargar la pestaña actual
     @Override
     protected void onResume() {
         super.onResume();
@@ -93,6 +96,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         }
     }
 
+    // 🔍 Menú de búsqueda
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_busqueda, menu);
@@ -115,11 +119,13 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         return true;
     }
 
+    // 🔎 Filtrar platillos según pestaña actual
     private void filtrarTexto(String texto) {
         int posicion = viewPager.getCurrentItem();
         pagerAdapter.filtrarEnFragment(posicion, texto);
     }
 
+    // 🔙 Flechita de regreso
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -129,6 +135,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // 🔙 Navegación hacia atrás
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

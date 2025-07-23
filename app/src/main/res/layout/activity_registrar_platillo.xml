@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarRegistrar"
             android:layout_width="match_parent"
@@ -19,7 +18,6 @@
             android:title="Nuevo platillo"
             android:titleTextColor="@android:color/white"
             android:navigationIcon="@drawable/ic_arrow_back" />
-
 
         <TextView
             android:layout_width="match_parent"
@@ -34,7 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ej. Tacos al pastor" />
-
 
         <TextView
             android:layout_width="match_parent"
@@ -51,7 +48,6 @@
             android:hint="Ej. 45"
             android:inputType="numberDecimal" />
 
-        <!-- Campo: Descripción -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +62,6 @@
             android:layout_height="wrap_content"
             android:hint="Ej. Con piña y salsa verde" />
 
-        <!-- Campo: Tipo -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,13 +70,12 @@
             android:textStyle="bold"
             android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/etTipoPlatillo"
+        <!-- ✅ Spinner CORRECTO -->
+        <Spinner
+            android:id="@+id/spinnerTipoPlatillo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ej. food, drink, complement" />
+            android:layout_height="wrap_content" />
 
-        <!-- Botón: Registrar -->
         <Button
             android:id="@+id/btnRegistrarPlatillo"
             android:layout_width="match_parent"
